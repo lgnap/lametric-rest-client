@@ -4,7 +4,8 @@
     "require": {
         "php": "^7.4",
         "jane-php/open-api-runtime": "^6.3",
-        "psr/http-client-implementation": "^1.0"
+        "psr/http-client-implementation": "^1.0",
+        "psr/http-factory-implementation":  "^1.0"
     },
     "require-dev": {
         "jane-php/open-api-3": "^6.3",
