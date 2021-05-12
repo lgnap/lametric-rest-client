@@ -1,0 +1,7 @@
+<?php
+
+return [
+    'openapi-file' => __DIR__ . '/open-api.yml',
+    'namespace' => 'LGnap\OpenAPIClient',
+    'directory' => __DIR__ . '/src/OpenAPIClient',
+];
