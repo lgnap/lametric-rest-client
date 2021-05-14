@@ -120,6 +120,20 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
      *
      *
      * @param int $deviceId
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \LGnap\OpenAPIClient\Exception\ListScreensAsFramesUnauthorizedException
+     * @throws \LGnap\OpenAPIClient\Exception\ListScreensAsFramesForbiddenException
+     *
+     * @return null|\LGnap\OpenAPIClient\Model\ResponseFrameList|\Psr\Http\Message\ResponseInterface
+     */
+    public function listScreensAsFrames(int $deviceId, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\ListScreensAsFrames($deviceId), $fetch);
+    }
+    /**
+     *
+     *
+     * @param int $deviceId
      * @param int $screenId
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \LGnap\OpenAPIClient\Exception\DeleteScreenByIdUnauthorizedException

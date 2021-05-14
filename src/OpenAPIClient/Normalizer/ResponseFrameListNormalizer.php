@@ -12,18 +12,18 @@ use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
-class DeviceNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
+class ResponseFrameListNormalizer implements DenormalizerInterface, NormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
     public function supportsDenormalization($data, $type, $format = null)
     {
-        return $type === 'LGnap\\OpenAPIClient\\Model\\Device';
+        return $type === 'LGnap\\OpenAPIClient\\Model\\ResponseFrameList';
     }
     public function supportsNormalization($data, $format = null)
     {
-        return is_object($data) && get_class($data) === 'LGnap\\OpenAPIClient\\Model\\Device';
+        return is_object($data) && get_class($data) === 'LGnap\\OpenAPIClient\\Model\\ResponseFrameList';
     }
     public function denormalize($data, $class, $format = null, array $context = array())
     {
@@ -33,32 +33,28 @@ class DeviceNormalizer implements DenormalizerInterface, NormalizerInterface, De
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \LGnap\OpenAPIClient\Model\Device();
+        $object = new \LGnap\OpenAPIClient\Model\ResponseFrameList();
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('name', $data)) {
-            $object->setName($data['name']);
-        }
-        if (\array_key_exists('user_id', $data)) {
-            $object->setUserId($data['user_id']);
-        }
-        if (\array_key_exists('id', $data)) {
-            $object->setId($data['id']);
+        if (\array_key_exists('frames', $data)) {
+            $values = array();
+            foreach ($data['frames'] as $value) {
+                $values[] = $this->denormalizer->denormalize($value, 'LGnap\\OpenAPIClient\\Model\\Screen', 'json', $context);
+            }
+            $object->setFrames($values);
         }
         return $object;
     }
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        if (null !== $object->getName()) {
-            $data['name'] = $object->getName();
-        }
-        if (null !== $object->getUserId()) {
-            $data['user_id'] = $object->getUserId();
-        }
-        if (null !== $object->getId()) {
-            $data['id'] = $object->getId();
+        if (null !== $object->getFrames()) {
+            $values = array();
+            foreach ($object->getFrames() as $value) {
+                $values[] = $this->normalizer->normalize($value, 'json', $context);
+            }
+            $data['frames'] = $values;
         }
         return $data;
     }

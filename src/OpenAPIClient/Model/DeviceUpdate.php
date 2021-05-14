@@ -9,34 +9,13 @@ class DeviceUpdate
      *
      * @var string
      */
-    protected $userId;
-    /**
-     *
-     *
-     * @var string
-     */
     protected $name;
     /**
      *
      *
-     * @return string
+     * @var int
      */
-    public function getUserId(): string
-    {
-        return $this->userId;
-    }
-    /**
-     *
-     *
-     * @param string $userId
-     *
-     * @return self
-     */
-    public function setUserId(string $userId): self
-    {
-        $this->userId = $userId;
-        return $this;
-    }
+    protected $userId;
     /**
      *
      *
@@ -56,6 +35,27 @@ class DeviceUpdate
     public function setName(string $name): self
     {
         $this->name = $name;
+        return $this;
+    }
+    /**
+     *
+     *
+     * @return int
+     */
+    public function getUserId(): int
+    {
+        return $this->userId;
+    }
+    /**
+     *
+     *
+     * @param int $userId
+     *
+     * @return self
+     */
+    public function setUserId(int $userId): self
+    {
+        $this->userId = $userId;
         return $this;
     }
 }
