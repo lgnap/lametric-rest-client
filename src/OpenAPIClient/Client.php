@@ -6,6 +6,58 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
 {
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \LGnap\OpenAPIClient\Exception\ListUsersUnauthorizedException
+     * @throws \LGnap\OpenAPIClient\Exception\ListUsersForbiddenException
+     *
+     * @return null|\LGnap\OpenAPIClient\Model\User[]|\Psr\Http\Message\ResponseInterface
+     */
+    public function listUsers(string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\ListUsers(), $fetch);
+    }
+    /**
+     *
+     *
+     * @param null|\LGnap\OpenAPIClient\Model\UserUpdate $requestBody
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \LGnap\OpenAPIClient\Exception\CreateUserUnauthorizedException
+     * @throws \LGnap\OpenAPIClient\Exception\CreateUserForbiddenException
+     *
+     * @return null|\LGnap\OpenAPIClient\Model\User|\Psr\Http\Message\ResponseInterface
+     */
+    public function createUser(?\LGnap\OpenAPIClient\Model\UserUpdate $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\CreateUser($requestBody), $fetch);
+    }
+    /**
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \LGnap\OpenAPIClient\Exception\DeleteUserUnauthorizedException
+     * @throws \LGnap\OpenAPIClient\Exception\DeleteUserForbiddenException
+     * @throws \LGnap\OpenAPIClient\Exception\DeleteUserNotFoundException
+     *
+     * @return null|\Psr\Http\Message\ResponseInterface
+     */
+    public function deleteUser(string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\DeleteUser(), $fetch);
+    }
+    /**
+     *
+     *
+     * @param null|\LGnap\OpenAPIClient\Model\UserUpdate $requestBody
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
+     * @throws \LGnap\OpenAPIClient\Exception\UpdateUserUnauthorizedException
+     * @throws \LGnap\OpenAPIClient\Exception\UpdateUserForbiddenException
+     * @throws \LGnap\OpenAPIClient\Exception\UpdateUserNotFoundException
+     *
+     * @return null|\LGnap\OpenAPIClient\Model\User|\Psr\Http\Message\ResponseInterface
+     */
+    public function updateUser(?\LGnap\OpenAPIClient\Model\UserUpdate $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    {
+        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\UpdateUser($requestBody), $fetch);
+    }
+    /**
+     * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \LGnap\OpenAPIClient\Exception\ListDevicesUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\ListDevicesForbiddenException
      *
