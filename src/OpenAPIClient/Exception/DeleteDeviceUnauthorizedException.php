@@ -2,7 +2,7 @@
 
 namespace LGnap\OpenAPIClient\Exception;
 
-class GetDeviceByIdUnauthorizedException extends UnauthorizedException
+class DeleteDeviceUnauthorizedException extends UnauthorizedException
 {
     private $error;
     public function __construct(\LGnap\OpenAPIClient\Model\Error $error)

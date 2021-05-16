@@ -2,12 +2,12 @@
 
 namespace LGnap\OpenAPIClient\Exception;
 
-class UpdateScreenByIdNotFoundException extends NotFoundException
+class DeleteScreenUnauthorizedException extends UnauthorizedException
 {
     private $error;
     public function __construct(\LGnap\OpenAPIClient\Model\Error $error)
     {
-        parent::__construct('Not found', 404);
+        parent::__construct('Unauthorized', 401);
         $this->error = $error;
     }
     public function getError()

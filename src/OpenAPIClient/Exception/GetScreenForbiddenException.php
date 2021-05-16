@@ -2,12 +2,12 @@
 
 namespace LGnap\OpenAPIClient\Exception;
 
-class DeleteDeviceByIdNotFoundException extends NotFoundException
+class GetScreenForbiddenException extends ForbiddenException
 {
     private $error;
     public function __construct(\LGnap\OpenAPIClient\Model\Error $error)
     {
-        parent::__construct('Not found', 404);
+        parent::__construct('Forbidden', 403);
         $this->error = $error;
     }
     public function getError()

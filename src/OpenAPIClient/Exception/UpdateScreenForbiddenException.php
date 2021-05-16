@@ -2,7 +2,7 @@
 
 namespace LGnap\OpenAPIClient\Exception;
 
-class UpdateScreenByIdForbiddenException extends ForbiddenException
+class UpdateScreenForbiddenException extends ForbiddenException
 {
     private $error;
     public function __construct(\LGnap\OpenAPIClient\Model\Error $error)

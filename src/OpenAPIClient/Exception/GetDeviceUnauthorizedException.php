@@ -2,12 +2,12 @@
 
 namespace LGnap\OpenAPIClient\Exception;
 
-class GetScreenByIdNotFoundException extends NotFoundException
+class GetDeviceUnauthorizedException extends UnauthorizedException
 {
     private $error;
     public function __construct(\LGnap\OpenAPIClient\Model\Error $error)
     {
-        parent::__construct('Not found', 404);
+        parent::__construct('Unauthorized', 401);
         $this->error = $error;
     }
     public function getError()

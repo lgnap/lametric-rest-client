@@ -2,7 +2,7 @@
 
 namespace LGnap\OpenAPIClient\Exception;
 
-class DeleteScreenByIdUnauthorizedException extends UnauthorizedException
+class GetScreenUnauthorizedException extends UnauthorizedException
 {
     private $error;
     public function __construct(\LGnap\OpenAPIClient\Model\Error $error)

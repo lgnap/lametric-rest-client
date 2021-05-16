@@ -2,7 +2,7 @@
 
 namespace LGnap\OpenAPIClient\Exception;
 
-class UpdateDeviceByIdNotFoundException extends NotFoundException
+class GetScreenNotFoundException extends NotFoundException
 {
     private $error;
     public function __construct(\LGnap\OpenAPIClient\Model\Error $error)

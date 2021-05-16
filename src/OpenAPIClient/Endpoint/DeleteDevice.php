@@ -2,7 +2,7 @@
 
 namespace LGnap\OpenAPIClient\Endpoint;
 
-class DeleteDeviceById extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint implements \LGnap\OpenAPIClient\Runtime\Client\Endpoint
+class DeleteDevice extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint implements \LGnap\OpenAPIClient\Runtime\Client\Endpoint
 {
     use \LGnap\OpenAPIClient\Runtime\Client\EndpointTrait;
     protected $device_id;
@@ -34,9 +34,9 @@ class DeleteDeviceById extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint 
     /**
      * {@inheritdoc}
      *
-     * @throws \LGnap\OpenAPIClient\Exception\DeleteDeviceByIdUnauthorizedException
-     * @throws \LGnap\OpenAPIClient\Exception\DeleteDeviceByIdForbiddenException
-     * @throws \LGnap\OpenAPIClient\Exception\DeleteDeviceByIdNotFoundException
+     * @throws \LGnap\OpenAPIClient\Exception\DeleteDeviceUnauthorizedException
+     * @throws \LGnap\OpenAPIClient\Exception\DeleteDeviceForbiddenException
+     * @throws \LGnap\OpenAPIClient\Exception\DeleteDeviceNotFoundException
      *
      * @return null
      */
@@ -46,13 +46,13 @@ class DeleteDeviceById extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint 
             return null;
         }
         if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \LGnap\OpenAPIClient\Exception\DeleteDeviceByIdUnauthorizedException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+            throw new \LGnap\OpenAPIClient\Exception\DeleteDeviceUnauthorizedException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
         }
         if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \LGnap\OpenAPIClient\Exception\DeleteDeviceByIdForbiddenException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+            throw new \LGnap\OpenAPIClient\Exception\DeleteDeviceForbiddenException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \LGnap\OpenAPIClient\Exception\DeleteDeviceByIdNotFoundException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+            throw new \LGnap\OpenAPIClient\Exception\DeleteDeviceNotFoundException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
         }
     }
     public function getAuthenticationScopes(): array

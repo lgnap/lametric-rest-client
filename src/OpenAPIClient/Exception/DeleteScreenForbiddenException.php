@@ -2,7 +2,7 @@
 
 namespace LGnap\OpenAPIClient\Exception;
 
-class DeleteScreenByIdForbiddenException extends ForbiddenException
+class DeleteScreenForbiddenException extends ForbiddenException
 {
     private $error;
     public function __construct(\LGnap\OpenAPIClient\Model\Error $error)

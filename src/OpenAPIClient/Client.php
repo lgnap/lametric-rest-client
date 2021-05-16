@@ -45,30 +45,30 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
      *
      * @param int $deviceId
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \LGnap\OpenAPIClient\Exception\DeleteDeviceByIdUnauthorizedException
-     * @throws \LGnap\OpenAPIClient\Exception\DeleteDeviceByIdForbiddenException
-     * @throws \LGnap\OpenAPIClient\Exception\DeleteDeviceByIdNotFoundException
+     * @throws \LGnap\OpenAPIClient\Exception\DeleteDeviceUnauthorizedException
+     * @throws \LGnap\OpenAPIClient\Exception\DeleteDeviceForbiddenException
+     * @throws \LGnap\OpenAPIClient\Exception\DeleteDeviceNotFoundException
      *
      * @return null|\Psr\Http\Message\ResponseInterface
      */
-    public function deleteDeviceById(int $deviceId, string $fetch = self::FETCH_OBJECT)
+    public function deleteDevice(int $deviceId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\DeleteDeviceById($deviceId), $fetch);
+        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\DeleteDevice($deviceId), $fetch);
     }
     /**
      * You will have to possibility to retrieve all if you're admin, only yours if not
      *
      * @param int $deviceId
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \LGnap\OpenAPIClient\Exception\GetDeviceByIdUnauthorizedException
-     * @throws \LGnap\OpenAPIClient\Exception\GetDeviceByIdForbiddenException
-     * @throws \LGnap\OpenAPIClient\Exception\GetDeviceByIdNotFoundException
+     * @throws \LGnap\OpenAPIClient\Exception\GetDeviceUnauthorizedException
+     * @throws \LGnap\OpenAPIClient\Exception\GetDeviceForbiddenException
+     * @throws \LGnap\OpenAPIClient\Exception\GetDeviceNotFoundException
      *
      * @return null|\LGnap\OpenAPIClient\Model\Device|\Psr\Http\Message\ResponseInterface
      */
-    public function getDeviceById(int $deviceId, string $fetch = self::FETCH_OBJECT)
+    public function getDevice(int $deviceId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\GetDeviceById($deviceId), $fetch);
+        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\GetDevice($deviceId), $fetch);
     }
     /**
      *
@@ -76,15 +76,15 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
      * @param int $deviceId
      * @param null|\LGnap\OpenAPIClient\Model\DeviceUpdate $requestBody
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \LGnap\OpenAPIClient\Exception\UpdateDeviceByIdUnauthorizedException
-     * @throws \LGnap\OpenAPIClient\Exception\UpdateDeviceByIdForbiddenException
-     * @throws \LGnap\OpenAPIClient\Exception\UpdateDeviceByIdNotFoundException
+     * @throws \LGnap\OpenAPIClient\Exception\UpdateDeviceUnauthorizedException
+     * @throws \LGnap\OpenAPIClient\Exception\UpdateDeviceForbiddenException
+     * @throws \LGnap\OpenAPIClient\Exception\UpdateDeviceNotFoundException
      *
      * @return null|\LGnap\OpenAPIClient\Model\Device|\Psr\Http\Message\ResponseInterface
      */
-    public function updateDeviceById(int $deviceId, ?\LGnap\OpenAPIClient\Model\DeviceUpdate $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    public function updateDevice(int $deviceId, ?\LGnap\OpenAPIClient\Model\DeviceUpdate $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\UpdateDeviceById($deviceId, $requestBody), $fetch);
+        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\UpdateDevice($deviceId, $requestBody), $fetch);
     }
     /**
      *
@@ -136,15 +136,15 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
      * @param int $deviceId
      * @param int $screenId
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \LGnap\OpenAPIClient\Exception\DeleteScreenByIdUnauthorizedException
-     * @throws \LGnap\OpenAPIClient\Exception\DeleteScreenByIdForbiddenException
-     * @throws \LGnap\OpenAPIClient\Exception\DeleteScreenByIdNotFoundException
+     * @throws \LGnap\OpenAPIClient\Exception\DeleteScreenUnauthorizedException
+     * @throws \LGnap\OpenAPIClient\Exception\DeleteScreenForbiddenException
+     * @throws \LGnap\OpenAPIClient\Exception\DeleteScreenNotFoundException
      *
      * @return null|\Psr\Http\Message\ResponseInterface
      */
-    public function deleteScreenById(int $deviceId, int $screenId, string $fetch = self::FETCH_OBJECT)
+    public function deleteScreen(int $deviceId, int $screenId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\DeleteScreenById($deviceId, $screenId), $fetch);
+        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\DeleteScreen($deviceId, $screenId), $fetch);
     }
     /**
      *
@@ -152,15 +152,15 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
      * @param int $deviceId
      * @param int $screenId
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \LGnap\OpenAPIClient\Exception\GetScreenByIdUnauthorizedException
-     * @throws \LGnap\OpenAPIClient\Exception\GetScreenByIdForbiddenException
-     * @throws \LGnap\OpenAPIClient\Exception\GetScreenByIdNotFoundException
+     * @throws \LGnap\OpenAPIClient\Exception\GetScreenUnauthorizedException
+     * @throws \LGnap\OpenAPIClient\Exception\GetScreenForbiddenException
+     * @throws \LGnap\OpenAPIClient\Exception\GetScreenNotFoundException
      *
      * @return null|\LGnap\OpenAPIClient\Model\Screen|\Psr\Http\Message\ResponseInterface
      */
-    public function getScreenById(int $deviceId, int $screenId, string $fetch = self::FETCH_OBJECT)
+    public function getScreen(int $deviceId, int $screenId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\GetScreenById($deviceId, $screenId), $fetch);
+        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\GetScreen($deviceId, $screenId), $fetch);
     }
     /**
      *
@@ -169,15 +169,15 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
      * @param int $screenId
      * @param null|\LGnap\OpenAPIClient\Model\ScreenUpdate $requestBody
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
-     * @throws \LGnap\OpenAPIClient\Exception\UpdateScreenByIdUnauthorizedException
-     * @throws \LGnap\OpenAPIClient\Exception\UpdateScreenByIdForbiddenException
-     * @throws \LGnap\OpenAPIClient\Exception\UpdateScreenByIdNotFoundException
+     * @throws \LGnap\OpenAPIClient\Exception\UpdateScreenUnauthorizedException
+     * @throws \LGnap\OpenAPIClient\Exception\UpdateScreenForbiddenException
+     * @throws \LGnap\OpenAPIClient\Exception\UpdateScreenNotFoundException
      *
      * @return null|\LGnap\OpenAPIClient\Model\Screen|\Psr\Http\Message\ResponseInterface
      */
-    public function updateScreenById(int $deviceId, int $screenId, ?\LGnap\OpenAPIClient\Model\ScreenUpdate $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    public function updateScreen(int $deviceId, int $screenId, ?\LGnap\OpenAPIClient\Model\ScreenUpdate $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\UpdateScreenById($deviceId, $screenId, $requestBody), $fetch);
+        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\UpdateScreen($deviceId, $screenId, $requestBody), $fetch);
     }
     public static function create($httpClient = null, array $additionalPlugins = array())
     {

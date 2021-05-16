@@ -2,12 +2,12 @@
 
 namespace LGnap\OpenAPIClient\Exception;
 
-class DeleteDeviceByIdForbiddenException extends ForbiddenException
+class UpdateScreenUnauthorizedException extends UnauthorizedException
 {
     private $error;
     public function __construct(\LGnap\OpenAPIClient\Model\Error $error)
     {
-        parent::__construct('Forbidden', 403);
+        parent::__construct('Unauthorized', 401);
         $this->error = $error;
     }
     public function getError()

@@ -2,21 +2,18 @@
 
 namespace LGnap\OpenAPIClient\Endpoint;
 
-class GetScreenById extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint implements \LGnap\OpenAPIClient\Runtime\Client\Endpoint
+class GetDevice extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint implements \LGnap\OpenAPIClient\Runtime\Client\Endpoint
 {
     use \LGnap\OpenAPIClient\Runtime\Client\EndpointTrait;
     protected $device_id;
-    protected $screen_id;
     /**
-     *
+     * You will have to possibility to retrieve all if you're admin, only yours if not
      *
      * @param int $deviceId
-     * @param int $screenId
      */
-    public function __construct(int $deviceId, int $screenId)
+    public function __construct(int $deviceId)
     {
         $this->device_id = $deviceId;
-        $this->screen_id = $screenId;
     }
     public function getMethod(): string
     {
@@ -24,7 +21,7 @@ class GetScreenById extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint imp
     }
     public function getUri(): string
     {
-        return str_replace(array('{device_id}', '{screen_id}'), array($this->device_id, $this->screen_id), '/devices/{device_id}/screens/{screen_id}');
+        return str_replace(array('{device_id}'), array($this->device_id), '/devices/{device_id}');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
@@ -37,25 +34,25 @@ class GetScreenById extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint imp
     /**
      * {@inheritdoc}
      *
-     * @throws \LGnap\OpenAPIClient\Exception\GetScreenByIdUnauthorizedException
-     * @throws \LGnap\OpenAPIClient\Exception\GetScreenByIdForbiddenException
-     * @throws \LGnap\OpenAPIClient\Exception\GetScreenByIdNotFoundException
+     * @throws \LGnap\OpenAPIClient\Exception\GetDeviceUnauthorizedException
+     * @throws \LGnap\OpenAPIClient\Exception\GetDeviceForbiddenException
+     * @throws \LGnap\OpenAPIClient\Exception\GetDeviceNotFoundException
      *
-     * @return null|\LGnap\OpenAPIClient\Model\Screen
+     * @return null|\LGnap\OpenAPIClient\Model\Device
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Screen', 'json');
+            return $serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Device', 'json');
         }
         if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \LGnap\OpenAPIClient\Exception\GetScreenByIdUnauthorizedException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+            throw new \LGnap\OpenAPIClient\Exception\GetDeviceUnauthorizedException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
         }
         if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \LGnap\OpenAPIClient\Exception\GetScreenByIdForbiddenException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+            throw new \LGnap\OpenAPIClient\Exception\GetDeviceForbiddenException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \LGnap\OpenAPIClient\Exception\GetScreenByIdNotFoundException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+            throw new \LGnap\OpenAPIClient\Exception\GetDeviceNotFoundException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
         }
     }
     public function getAuthenticationScopes(): array

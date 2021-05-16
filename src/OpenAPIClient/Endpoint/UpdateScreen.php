@@ -2,7 +2,7 @@
 
 namespace LGnap\OpenAPIClient\Endpoint;
 
-class UpdateScreenById extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint implements \LGnap\OpenAPIClient\Runtime\Client\Endpoint
+class UpdateScreen extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint implements \LGnap\OpenAPIClient\Runtime\Client\Endpoint
 {
     use \LGnap\OpenAPIClient\Runtime\Client\EndpointTrait;
     protected $device_id;
@@ -42,9 +42,9 @@ class UpdateScreenById extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint 
     /**
      * {@inheritdoc}
      *
-     * @throws \LGnap\OpenAPIClient\Exception\UpdateScreenByIdUnauthorizedException
-     * @throws \LGnap\OpenAPIClient\Exception\UpdateScreenByIdForbiddenException
-     * @throws \LGnap\OpenAPIClient\Exception\UpdateScreenByIdNotFoundException
+     * @throws \LGnap\OpenAPIClient\Exception\UpdateScreenUnauthorizedException
+     * @throws \LGnap\OpenAPIClient\Exception\UpdateScreenForbiddenException
+     * @throws \LGnap\OpenAPIClient\Exception\UpdateScreenNotFoundException
      *
      * @return null|\LGnap\OpenAPIClient\Model\Screen
      */
@@ -54,13 +54,13 @@ class UpdateScreenById extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint 
             return $serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Screen', 'json');
         }
         if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \LGnap\OpenAPIClient\Exception\UpdateScreenByIdUnauthorizedException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+            throw new \LGnap\OpenAPIClient\Exception\UpdateScreenUnauthorizedException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
         }
         if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \LGnap\OpenAPIClient\Exception\UpdateScreenByIdForbiddenException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+            throw new \LGnap\OpenAPIClient\Exception\UpdateScreenForbiddenException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \LGnap\OpenAPIClient\Exception\UpdateScreenByIdNotFoundException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+            throw new \LGnap\OpenAPIClient\Exception\UpdateScreenNotFoundException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
         }
     }
     public function getAuthenticationScopes(): array
