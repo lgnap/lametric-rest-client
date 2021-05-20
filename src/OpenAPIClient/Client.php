@@ -141,22 +141,26 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
     /**
      *
      *
-     * @param int $deviceId
+     * @param array $queryParameters {
+     *     @var int $device_id
+     * }
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \LGnap\OpenAPIClient\Exception\ListScreensUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\ListScreensForbiddenException
      *
      * @return null|\LGnap\OpenAPIClient\Model\Screen[]|\Psr\Http\Message\ResponseInterface
      */
-    public function listScreens(int $deviceId, string $fetch = self::FETCH_OBJECT)
+    public function listScreens(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\ListScreens($deviceId), $fetch);
+        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\ListScreens($queryParameters), $fetch);
     }
     /**
      *
      *
-     * @param int $deviceId
      * @param null|\LGnap\OpenAPIClient\Model\ScreenUpdate $requestBody
+     * @param array $queryParameters {
+     *     @var int $device_id
+     * }
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \LGnap\OpenAPIClient\Exception\CreateScreenUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\CreateScreenForbiddenException
@@ -164,29 +168,33 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
      *
      * @return null|\LGnap\OpenAPIClient\Model\Screen|\Psr\Http\Message\ResponseInterface
      */
-    public function createScreen(int $deviceId, ?\LGnap\OpenAPIClient\Model\ScreenUpdate $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    public function createScreen(?\LGnap\OpenAPIClient\Model\ScreenUpdate $requestBody = null, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\CreateScreen($deviceId, $requestBody), $fetch);
+        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\CreateScreen($requestBody, $queryParameters), $fetch);
     }
     /**
      *
      *
-     * @param int $deviceId
+     * @param array $queryParameters {
+     *     @var int $device_id
+     * }
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \LGnap\OpenAPIClient\Exception\ListScreensAsFramesUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\ListScreensAsFramesForbiddenException
      *
      * @return null|\LGnap\OpenAPIClient\Model\ResponseFrameList|\Psr\Http\Message\ResponseInterface
      */
-    public function listScreensAsFrames(int $deviceId, string $fetch = self::FETCH_OBJECT)
+    public function listScreensAsFrames(array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\ListScreensAsFrames($deviceId), $fetch);
+        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\ListScreensAsFrames($queryParameters), $fetch);
     }
     /**
      *
      *
-     * @param int $deviceId
      * @param int $screenId
+     * @param array $queryParameters {
+     *     @var int $device_id
+     * }
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \LGnap\OpenAPIClient\Exception\DeleteScreenUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\DeleteScreenForbiddenException
@@ -194,15 +202,17 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
      *
      * @return null|\Psr\Http\Message\ResponseInterface
      */
-    public function deleteScreen(int $deviceId, int $screenId, string $fetch = self::FETCH_OBJECT)
+    public function deleteScreen(int $screenId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\DeleteScreen($deviceId, $screenId), $fetch);
+        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\DeleteScreen($screenId, $queryParameters), $fetch);
     }
     /**
      *
      *
-     * @param int $deviceId
      * @param int $screenId
+     * @param array $queryParameters {
+     *     @var int $device_id
+     * }
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \LGnap\OpenAPIClient\Exception\GetScreenUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\GetScreenForbiddenException
@@ -210,16 +220,18 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
      *
      * @return null|\LGnap\OpenAPIClient\Model\Screen|\Psr\Http\Message\ResponseInterface
      */
-    public function getScreen(int $deviceId, int $screenId, string $fetch = self::FETCH_OBJECT)
+    public function getScreen(int $screenId, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\GetScreen($deviceId, $screenId), $fetch);
+        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\GetScreen($screenId, $queryParameters), $fetch);
     }
     /**
      *
      *
-     * @param int $deviceId
      * @param int $screenId
      * @param null|\LGnap\OpenAPIClient\Model\ScreenUpdate $requestBody
+     * @param array $queryParameters {
+     *     @var int $device_id
+     * }
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \LGnap\OpenAPIClient\Exception\UpdateScreenUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\UpdateScreenForbiddenException
@@ -227,16 +239,16 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
      *
      * @return null|\LGnap\OpenAPIClient\Model\Screen|\Psr\Http\Message\ResponseInterface
      */
-    public function updateScreen(int $deviceId, int $screenId, ?\LGnap\OpenAPIClient\Model\ScreenUpdate $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    public function updateScreen(int $screenId, ?\LGnap\OpenAPIClient\Model\ScreenUpdate $requestBody = null, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\UpdateScreen($deviceId, $screenId, $requestBody), $fetch);
+        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\UpdateScreen($screenId, $requestBody, $queryParameters), $fetch);
     }
     public static function create($httpClient = null, array $additionalPlugins = array())
     {
         if (null === $httpClient) {
             $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins = array();
-            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://lametric.helpcomputer.org/v1');
+            $uri = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://lametric.helpcomputer.org/v2');
             $plugins[] = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
             $plugins[] = new \Http\Client\Common\Plugin\AddPathPlugin($uri);
             if (count($additionalPlugins) > 0) {

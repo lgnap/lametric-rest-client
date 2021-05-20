@@ -5,17 +5,18 @@ namespace LGnap\OpenAPIClient\Endpoint;
 class CreateScreen extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint implements \LGnap\OpenAPIClient\Runtime\Client\Endpoint
 {
     use \LGnap\OpenAPIClient\Runtime\Client\EndpointTrait;
-    protected $device_id;
     /**
      *
      *
-     * @param int $deviceId
      * @param null|\LGnap\OpenAPIClient\Model\ScreenUpdate $requestBody
+     * @param array $queryParameters {
+     *     @var int $device_id
+     * }
      */
-    public function __construct(int $deviceId, ?\LGnap\OpenAPIClient\Model\ScreenUpdate $requestBody = null)
+    public function __construct(?\LGnap\OpenAPIClient\Model\ScreenUpdate $requestBody = null, array $queryParameters = array())
     {
-        $this->device_id = $deviceId;
         $this->body = $requestBody;
+        $this->queryParameters = $queryParameters;
     }
     public function getMethod(): string
     {
@@ -23,7 +24,7 @@ class CreateScreen extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint impl
     }
     public function getUri(): string
     {
-        return str_replace(array('{device_id}'), array($this->device_id), '/devices/{device_id}/screens');
+        return '/screens';
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
@@ -35,6 +36,15 @@ class CreateScreen extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint impl
     public function getExtraHeaders(): array
     {
         return array('Accept' => array('application/json'));
+    }
+    protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
+    {
+        $optionsResolver = parent::getQueryOptionsResolver();
+        $optionsResolver->setDefined(array('device_id'));
+        $optionsResolver->setRequired(array('device_id'));
+        $optionsResolver->setDefaults(array());
+        $optionsResolver->setAllowedTypes('device_id', array('int'));
+        return $optionsResolver;
     }
     /**
      * {@inheritdoc}

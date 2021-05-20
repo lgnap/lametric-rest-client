@@ -5,15 +5,16 @@ namespace LGnap\OpenAPIClient\Endpoint;
 class ListScreensAsFrames extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint implements \LGnap\OpenAPIClient\Runtime\Client\Endpoint
 {
     use \LGnap\OpenAPIClient\Runtime\Client\EndpointTrait;
-    protected $device_id;
     /**
      *
      *
-     * @param int $deviceId
+     * @param array $queryParameters {
+     *     @var int $device_id
+     * }
      */
-    public function __construct(int $deviceId)
+    public function __construct(array $queryParameters = array())
     {
-        $this->device_id = $deviceId;
+        $this->queryParameters = $queryParameters;
     }
     public function getMethod(): string
     {
@@ -21,7 +22,7 @@ class ListScreensAsFrames extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoi
     }
     public function getUri(): string
     {
-        return str_replace(array('{device_id}'), array($this->device_id), '/devices/{device_id}/screens/frames');
+        return '/screens/frames';
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
@@ -30,6 +31,15 @@ class ListScreensAsFrames extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoi
     public function getExtraHeaders(): array
     {
         return array('Accept' => array('application/json'));
+    }
+    protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
+    {
+        $optionsResolver = parent::getQueryOptionsResolver();
+        $optionsResolver->setDefined(array('device_id'));
+        $optionsResolver->setRequired(array('device_id'));
+        $optionsResolver->setDefaults(array());
+        $optionsResolver->setAllowedTypes('device_id', array('int'));
+        return $optionsResolver;
     }
     /**
      * {@inheritdoc}
