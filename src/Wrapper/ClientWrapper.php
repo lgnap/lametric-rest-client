@@ -14,19 +14,19 @@ use Psr\Http\Message\UriInterface;
 
 class ClientWrapper extends Client
 {
-    public const URL_PROD = 'https://lametric.helpcomputer.org/v1';
-    public const URL_DEV = 'http://localhost:8000/v1';
+    public const URL_PROD = 'https://lametric.helpcomputer.org/';
+    public const URL_DEV = 'http://localhost:8000/';
 
-    public static function createProdClient(string $accessToken): ClientWrapper
+    public static function createProdClient(string $accessToken, string $version = 'v1'): ClientWrapper
     {
-        $uri = Psr17FactoryDiscovery::findUriFactory()->createUri(self::URL_PROD);
+        $uri = Psr17FactoryDiscovery::findUriFactory()->createUri(self::URL_PROD . $version);
 
         return self::createCommonClient($uri, new BasicAuth($accessToken, ''));
     }
 
-    public static function createDevClient(string $accessToken): ClientWrapper
+    public static function createDevClient(string $accessToken, string $version = 'v1'): ClientWrapper
     {
-        $uri = Psr17FactoryDiscovery::findUriFactory()->createUri(self::URL_DEV);
+        $uri = Psr17FactoryDiscovery::findUriFactory()->createUri(self::URL_DEV . $version);
 
         return self::createCommonClient($uri, new BasicAuth($accessToken, ''));
     }
