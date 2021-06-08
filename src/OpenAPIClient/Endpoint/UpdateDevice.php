@@ -42,6 +42,7 @@ class UpdateDevice extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint impl
      * @throws \LGnap\OpenAPIClient\Exception\UpdateDeviceUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\UpdateDeviceForbiddenException
      * @throws \LGnap\OpenAPIClient\Exception\UpdateDeviceNotFoundException
+     * @throws \LGnap\OpenAPIClient\Exception\UpdateDeviceUnprocessableEntityException
      *
      * @return null|\LGnap\OpenAPIClient\Model\Device
      */
@@ -58,6 +59,9 @@ class UpdateDevice extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint impl
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \LGnap\OpenAPIClient\Exception\UpdateDeviceNotFoundException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+        }
+        if (is_null($contentType) === false && (422 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            throw new \LGnap\OpenAPIClient\Exception\UpdateDeviceUnprocessableEntityException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\ErrorValidationItem[]', 'json'));
         }
     }
     public function getAuthenticationScopes(): array

@@ -38,6 +38,7 @@ class CreateDevice extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint impl
      *
      * @throws \LGnap\OpenAPIClient\Exception\CreateDeviceUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\CreateDeviceForbiddenException
+     * @throws \LGnap\OpenAPIClient\Exception\CreateDeviceUnprocessableEntityException
      *
      * @return null|\LGnap\OpenAPIClient\Model\ItemCreation
      */
@@ -51,6 +52,9 @@ class CreateDevice extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint impl
         }
         if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \LGnap\OpenAPIClient\Exception\CreateDeviceForbiddenException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+        }
+        if (is_null($contentType) === false && (422 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            throw new \LGnap\OpenAPIClient\Exception\CreateDeviceUnprocessableEntityException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\ErrorValidationItem[]', 'json'));
         }
     }
     public function getAuthenticationScopes(): array

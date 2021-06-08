@@ -22,6 +22,7 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \LGnap\OpenAPIClient\Exception\CreateUserUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\CreateUserForbiddenException
+     * @throws \LGnap\OpenAPIClient\Exception\CreateUserUnprocessableEntityException
      *
      * @return null|\LGnap\OpenAPIClient\Model\ItemCreation|\Psr\Http\Message\ResponseInterface
      */
@@ -53,6 +54,7 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
      * @throws \LGnap\OpenAPIClient\Exception\UpdateUserUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\UpdateUserForbiddenException
      * @throws \LGnap\OpenAPIClient\Exception\UpdateUserNotFoundException
+     * @throws \LGnap\OpenAPIClient\Exception\UpdateUserUnprocessableEntityException
      *
      * @return null|\LGnap\OpenAPIClient\Model\User|\Psr\Http\Message\ResponseInterface
      */
@@ -78,6 +80,7 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \LGnap\OpenAPIClient\Exception\CreateDeviceUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\CreateDeviceForbiddenException
+     * @throws \LGnap\OpenAPIClient\Exception\CreateDeviceUnprocessableEntityException
      *
      * @return null|\LGnap\OpenAPIClient\Model\ItemCreation|\Psr\Http\Message\ResponseInterface
      */
@@ -135,6 +138,7 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
      * @throws \LGnap\OpenAPIClient\Exception\UpdateDeviceUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\UpdateDeviceForbiddenException
      * @throws \LGnap\OpenAPIClient\Exception\UpdateDeviceNotFoundException
+     * @throws \LGnap\OpenAPIClient\Exception\UpdateDeviceUnprocessableEntityException
      *
      * @return null|\LGnap\OpenAPIClient\Model\Device|\Psr\Http\Message\ResponseInterface
      */
@@ -169,6 +173,7 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
      * @throws \LGnap\OpenAPIClient\Exception\CreateScreenUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\CreateScreenForbiddenException
      * @throws \LGnap\OpenAPIClient\Exception\CreateScreenNotFoundException
+     * @throws \LGnap\OpenAPIClient\Exception\CreateScreenUnprocessableEntityException
      *
      * @return null|\LGnap\OpenAPIClient\Model\ItemCreation|\Psr\Http\Message\ResponseInterface
      */
@@ -240,6 +245,7 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
      * @throws \LGnap\OpenAPIClient\Exception\UpdateScreenUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\UpdateScreenForbiddenException
      * @throws \LGnap\OpenAPIClient\Exception\UpdateScreenNotFoundException
+     * @throws \LGnap\OpenAPIClient\Exception\UpdateScreenUnprocessableEntityException
      *
      * @return null|\LGnap\OpenAPIClient\Model\Screen|\Psr\Http\Message\ResponseInterface
      */

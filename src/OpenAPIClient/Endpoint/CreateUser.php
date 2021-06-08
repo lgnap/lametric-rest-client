@@ -38,6 +38,7 @@ class CreateUser extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint implem
      *
      * @throws \LGnap\OpenAPIClient\Exception\CreateUserUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\CreateUserForbiddenException
+     * @throws \LGnap\OpenAPIClient\Exception\CreateUserUnprocessableEntityException
      *
      * @return null|\LGnap\OpenAPIClient\Model\ItemCreation
      */
@@ -51,6 +52,9 @@ class CreateUser extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint implem
         }
         if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \LGnap\OpenAPIClient\Exception\CreateUserForbiddenException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+        }
+        if (is_null($contentType) === false && (422 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            throw new \LGnap\OpenAPIClient\Exception\CreateUserUnprocessableEntityException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\ErrorValidationItem[]', 'json'));
         }
     }
     public function getAuthenticationScopes(): array

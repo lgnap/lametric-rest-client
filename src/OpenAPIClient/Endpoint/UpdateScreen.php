@@ -55,6 +55,7 @@ class UpdateScreen extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint impl
      * @throws \LGnap\OpenAPIClient\Exception\UpdateScreenUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\UpdateScreenForbiddenException
      * @throws \LGnap\OpenAPIClient\Exception\UpdateScreenNotFoundException
+     * @throws \LGnap\OpenAPIClient\Exception\UpdateScreenUnprocessableEntityException
      *
      * @return null|\LGnap\OpenAPIClient\Model\Screen
      */
@@ -71,6 +72,9 @@ class UpdateScreen extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint impl
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \LGnap\OpenAPIClient\Exception\UpdateScreenNotFoundException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+        }
+        if (is_null($contentType) === false && (422 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            throw new \LGnap\OpenAPIClient\Exception\UpdateScreenUnprocessableEntityException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\ErrorValidationItem[]', 'json'));
         }
     }
     public function getAuthenticationScopes(): array

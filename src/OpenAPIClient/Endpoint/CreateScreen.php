@@ -52,6 +52,7 @@ class CreateScreen extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint impl
      * @throws \LGnap\OpenAPIClient\Exception\CreateScreenUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\CreateScreenForbiddenException
      * @throws \LGnap\OpenAPIClient\Exception\CreateScreenNotFoundException
+     * @throws \LGnap\OpenAPIClient\Exception\CreateScreenUnprocessableEntityException
      *
      * @return null|\LGnap\OpenAPIClient\Model\ItemCreation
      */
@@ -68,6 +69,9 @@ class CreateScreen extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint impl
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \LGnap\OpenAPIClient\Exception\CreateScreenNotFoundException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+        }
+        if (is_null($contentType) === false && (422 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            throw new \LGnap\OpenAPIClient\Exception\CreateScreenUnprocessableEntityException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\ErrorValidationItem[]', 'json'));
         }
     }
     public function getAuthenticationScopes(): array

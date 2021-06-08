@@ -42,6 +42,7 @@ class UpdateUser extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint implem
      * @throws \LGnap\OpenAPIClient\Exception\UpdateUserUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\UpdateUserForbiddenException
      * @throws \LGnap\OpenAPIClient\Exception\UpdateUserNotFoundException
+     * @throws \LGnap\OpenAPIClient\Exception\UpdateUserUnprocessableEntityException
      *
      * @return null|\LGnap\OpenAPIClient\Model\User
      */
@@ -58,6 +59,9 @@ class UpdateUser extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint implem
         }
         if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \LGnap\OpenAPIClient\Exception\UpdateUserNotFoundException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+        }
+        if (is_null($contentType) === false && (422 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            throw new \LGnap\OpenAPIClient\Exception\UpdateUserUnprocessableEntityException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\ErrorValidationItem[]', 'json'));
         }
     }
     public function getAuthenticationScopes(): array
