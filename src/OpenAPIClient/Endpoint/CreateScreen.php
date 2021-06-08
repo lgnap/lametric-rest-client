@@ -53,12 +53,12 @@ class CreateScreen extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint impl
      * @throws \LGnap\OpenAPIClient\Exception\CreateScreenForbiddenException
      * @throws \LGnap\OpenAPIClient\Exception\CreateScreenNotFoundException
      *
-     * @return null|\LGnap\OpenAPIClient\Model\Screen
+     * @return null|\LGnap\OpenAPIClient\Model\ItemCreation
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Screen', 'json');
+            return $serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\ItemCreation', 'json');
         }
         if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \LGnap\OpenAPIClient\Exception\CreateScreenUnauthorizedException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));

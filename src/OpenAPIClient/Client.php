@@ -23,7 +23,7 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
      * @throws \LGnap\OpenAPIClient\Exception\CreateUserUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\CreateUserForbiddenException
      *
-     * @return null|\LGnap\OpenAPIClient\Model\User|\Psr\Http\Message\ResponseInterface
+     * @return null|\LGnap\OpenAPIClient\Model\ItemCreation|\Psr\Http\Message\ResponseInterface
      */
     public function createUser(?\LGnap\OpenAPIClient\Model\UserUpdate $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -75,7 +75,7 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
      * @throws \LGnap\OpenAPIClient\Exception\CreateDeviceUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\CreateDeviceForbiddenException
      *
-     * @return null|\LGnap\OpenAPIClient\Model\Device|\Psr\Http\Message\ResponseInterface
+     * @return null|\LGnap\OpenAPIClient\Model\ItemCreation|\Psr\Http\Message\ResponseInterface
      */
     public function createDevice(?\LGnap\OpenAPIClient\Model\DeviceUpdate $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
@@ -166,7 +166,7 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
      * @throws \LGnap\OpenAPIClient\Exception\CreateScreenForbiddenException
      * @throws \LGnap\OpenAPIClient\Exception\CreateScreenNotFoundException
      *
-     * @return null|\LGnap\OpenAPIClient\Model\Screen|\Psr\Http\Message\ResponseInterface
+     * @return null|\LGnap\OpenAPIClient\Model\ItemCreation|\Psr\Http\Message\ResponseInterface
      */
     public function createScreen(?\LGnap\OpenAPIClient\Model\ScreenUpdate $requestBody = null, array $queryParameters = array(), string $fetch = self::FETCH_OBJECT)
     {

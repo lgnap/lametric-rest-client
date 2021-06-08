@@ -39,12 +39,12 @@ class CreateDevice extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint impl
      * @throws \LGnap\OpenAPIClient\Exception\CreateDeviceUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\CreateDeviceForbiddenException
      *
-     * @return null|\LGnap\OpenAPIClient\Model\Device
+     * @return null|\LGnap\OpenAPIClient\Model\ItemCreation
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
         if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Device', 'json');
+            return $serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\ItemCreation', 'json');
         }
         if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \LGnap\OpenAPIClient\Exception\CreateDeviceUnauthorizedException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));

@@ -39,12 +39,12 @@ class CreateUser extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint implem
      * @throws \LGnap\OpenAPIClient\Exception\CreateUserUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\CreateUserForbiddenException
      *
-     * @return null|\LGnap\OpenAPIClient\Model\User
+     * @return null|\LGnap\OpenAPIClient\Model\ItemCreation
      */
     protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\User', 'json');
+        if (is_null($contentType) === false && (201 === $status && mb_strpos($contentType, 'application/json') !== false)) {
+            return $serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\ItemCreation', 'json');
         }
         if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
             throw new \LGnap\OpenAPIClient\Exception\CreateUserUnauthorizedException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
