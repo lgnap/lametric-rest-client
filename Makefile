@@ -1,8 +1,8 @@
-.PHONY: default retrieve-last-openapi-spec generate-openapi-client php-cs-fixer help
+.PHONY: default retrieve-last-openapi-spec-dev retrieve-last-openapi-spec generate-openapi-client php-cs-fixer help
 
 default: help
 
-generate: retrieve-last-openapi-spec generate-openapi-client php-cs-fixer ## Generate classes from fresh open-api.yml
+generate: retrieve-last-openapi-spec-dev generate-openapi-client php-cs-fixer ## Generate classes from fresh open-api.yml
 
 docker-build: ## build
 	docker-compose build
@@ -11,6 +11,9 @@ get-composer: ## Install composer through docker-compose
 	wget  -O composer-installer https://raw.githubusercontent.com/composer/getcomposer.org/76a7060ccb93902cd7576b67264ad91c8a2700e2/web/installer
 	docker-compose run php php composer-installer
 	rm composer-installer
+
+retrieve-last-openapi-spec-dev: ## retrieve last version of openapi online
+	wget -O open-api.yml http://localhost:8000/openapi_v2.yml
 
 retrieve-last-openapi-spec: ## retrieve last version of openapi online
 	wget -O open-api.yml https://lametric.helpcomputer.org/openapi_v2.yml
