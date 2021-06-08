@@ -5,13 +5,23 @@ namespace LGnap\OpenAPIClient\Endpoint;
 class DeleteUser extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint implements \LGnap\OpenAPIClient\Runtime\Client\Endpoint
 {
     use \LGnap\OpenAPIClient\Runtime\Client\EndpointTrait;
+    protected $user_id;
+    /**
+     *
+     *
+     * @param int $userId
+     */
+    public function __construct(int $userId)
+    {
+        $this->user_id = $userId;
+    }
     public function getMethod(): string
     {
         return 'DELETE';
     }
     public function getUri(): string
     {
-        return '/users/{user_id}';
+        return str_replace(array('{user_id}'), array($this->user_id), '/users/{user_id}');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {

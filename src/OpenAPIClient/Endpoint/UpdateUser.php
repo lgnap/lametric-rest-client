@@ -5,13 +5,16 @@ namespace LGnap\OpenAPIClient\Endpoint;
 class UpdateUser extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint implements \LGnap\OpenAPIClient\Runtime\Client\Endpoint
 {
     use \LGnap\OpenAPIClient\Runtime\Client\EndpointTrait;
+    protected $user_id;
     /**
      *
      *
+     * @param int $userId
      * @param null|\LGnap\OpenAPIClient\Model\UserUpdate $requestBody
      */
-    public function __construct(?\LGnap\OpenAPIClient\Model\UserUpdate $requestBody = null)
+    public function __construct(int $userId, ?\LGnap\OpenAPIClient\Model\UserUpdate $requestBody = null)
     {
+        $this->user_id = $userId;
         $this->body = $requestBody;
     }
     public function getMethod(): string
@@ -20,7 +23,7 @@ class UpdateUser extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint implem
     }
     public function getUri(): string
     {
-        return '/users/{user_id}';
+        return str_replace(array('{user_id}'), array($this->user_id), '/users/{user_id}');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {

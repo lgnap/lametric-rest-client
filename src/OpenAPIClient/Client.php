@@ -30,6 +30,9 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
         return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\CreateUser($requestBody), $fetch);
     }
     /**
+     *
+     *
+     * @param int $userId
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \LGnap\OpenAPIClient\Exception\DeleteUserUnauthorizedException
      * @throws \LGnap\OpenAPIClient\Exception\DeleteUserForbiddenException
@@ -37,13 +40,14 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
      *
      * @return null|\Psr\Http\Message\ResponseInterface
      */
-    public function deleteUser(string $fetch = self::FETCH_OBJECT)
+    public function deleteUser(int $userId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\DeleteUser(), $fetch);
+        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\DeleteUser($userId), $fetch);
     }
     /**
      *
      *
+     * @param int $userId
      * @param null|\LGnap\OpenAPIClient\Model\UserUpdate $requestBody
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
      * @throws \LGnap\OpenAPIClient\Exception\UpdateUserUnauthorizedException
@@ -52,9 +56,9 @@ class Client extends \LGnap\OpenAPIClient\Runtime\Client\Client
      *
      * @return null|\LGnap\OpenAPIClient\Model\User|\Psr\Http\Message\ResponseInterface
      */
-    public function updateUser(?\LGnap\OpenAPIClient\Model\UserUpdate $requestBody = null, string $fetch = self::FETCH_OBJECT)
+    public function updateUser(int $userId, ?\LGnap\OpenAPIClient\Model\UserUpdate $requestBody = null, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\UpdateUser($requestBody), $fetch);
+        return $this->executeEndpoint(new \LGnap\OpenAPIClient\Endpoint\UpdateUser($userId, $requestBody), $fetch);
     }
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
