@@ -37,11 +37,15 @@ class DeviceNormalizer implements DenormalizerInterface, NormalizerInterface, De
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('name', $data)) {
+        if (\array_key_exists('name', $data) && $data['name'] !== null) {
             $object->setName($data['name']);
+        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
+            $object->setName(null);
         }
-        if (\array_key_exists('user_id', $data)) {
+        if (\array_key_exists('user_id', $data) && $data['user_id'] !== null) {
             $object->setUserId($data['user_id']);
+        } elseif (\array_key_exists('user_id', $data) && $data['user_id'] === null) {
+            $object->setUserId(null);
         }
         if (\array_key_exists('id', $data)) {
             $object->setId($data['id']);
@@ -57,9 +61,7 @@ class DeviceNormalizer implements DenormalizerInterface, NormalizerInterface, De
         if (null !== $object->getUserId()) {
             $data['user_id'] = $object->getUserId();
         }
-        if (null !== $object->getId()) {
-            $data['id'] = $object->getId();
-        }
+        $data['id'] = $object->getId();
         return $data;
     }
 }

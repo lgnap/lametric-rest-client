@@ -7,13 +7,13 @@ class Device
     /**
      *
      *
-     * @var string
+     * @var string|null
      */
     protected $name;
     /**
      *
      *
-     * @var int
+     * @var int|null
      */
     protected $userId;
     /**
@@ -25,20 +25,20 @@ class Device
     /**
      *
      *
-     * @return string
+     * @return string|null
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
     /**
      *
      *
-     * @param string $name
+     * @param string|null $name
      *
      * @return self
      */
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
         return $this;
@@ -46,20 +46,20 @@ class Device
     /**
      *
      *
-     * @return int
+     * @return int|null
      */
-    public function getUserId(): int
+    public function getUserId(): ?int
     {
         return $this->userId;
     }
     /**
      *
      *
-     * @param int $userId
+     * @param int|null $userId
      *
      * @return self
      */
-    public function setUserId(int $userId): self
+    public function setUserId(?int $userId): self
     {
         $this->userId = $userId;
         return $this;

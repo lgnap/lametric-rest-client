@@ -37,11 +37,15 @@ class DeviceUpdateNormalizer implements DenormalizerInterface, NormalizerInterfa
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('name', $data)) {
+        if (\array_key_exists('name', $data) && $data['name'] !== null) {
             $object->setName($data['name']);
+        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
+            $object->setName(null);
         }
-        if (\array_key_exists('user_id', $data)) {
+        if (\array_key_exists('user_id', $data) && $data['user_id'] !== null) {
             $object->setUserId($data['user_id']);
+        } elseif (\array_key_exists('user_id', $data) && $data['user_id'] === null) {
+            $object->setUserId(null);
         }
         return $object;
     }

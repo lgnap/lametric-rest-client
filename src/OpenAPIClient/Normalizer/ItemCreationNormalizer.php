@@ -45,9 +45,7 @@ class ItemCreationNormalizer implements DenormalizerInterface, NormalizerInterfa
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        if (null !== $object->getId()) {
-            $data['id'] = $object->getId();
-        }
+        $data['id'] = $object->getId();
         return $data;
     }
 }

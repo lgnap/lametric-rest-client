@@ -51,15 +51,9 @@ class ScreenNormalizer implements DenormalizerInterface, NormalizerInterface, De
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        if (null !== $object->getIcon()) {
-            $data['icon'] = $object->getIcon();
-        }
-        if (null !== $object->getText()) {
-            $data['text'] = $object->getText();
-        }
-        if (null !== $object->getId()) {
-            $data['id'] = $object->getId();
-        }
+        $data['icon'] = $object->getIcon();
+        $data['text'] = $object->getText();
+        $data['id'] = $object->getId();
         return $data;
     }
 }

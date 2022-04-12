@@ -37,14 +37,20 @@ class UserNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
         if (null === $data || false === \is_array($data)) {
             return $object;
         }
-        if (\array_key_exists('username', $data)) {
+        if (\array_key_exists('username', $data) && $data['username'] !== null) {
             $object->setUsername($data['username']);
+        } elseif (\array_key_exists('username', $data) && $data['username'] === null) {
+            $object->setUsername(null);
         }
-        if (\array_key_exists('authKey', $data)) {
+        if (\array_key_exists('authKey', $data) && $data['authKey'] !== null) {
             $object->setAuthKey($data['authKey']);
+        } elseif (\array_key_exists('authKey', $data) && $data['authKey'] === null) {
+            $object->setAuthKey(null);
         }
-        if (\array_key_exists('accessToken', $data)) {
+        if (\array_key_exists('accessToken', $data) && $data['accessToken'] !== null) {
             $object->setAccessToken($data['accessToken']);
+        } elseif (\array_key_exists('accessToken', $data) && $data['accessToken'] === null) {
+            $object->setAccessToken(null);
         }
         if (\array_key_exists('id', $data)) {
             $object->setId($data['id']);
@@ -63,9 +69,7 @@ class UserNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
         if (null !== $object->getAccessToken()) {
             $data['accessToken'] = $object->getAccessToken();
         }
-        if (null !== $object->getId()) {
-            $data['id'] = $object->getId();
-        }
+        $data['id'] = $object->getId();
         return $data;
     }
 }

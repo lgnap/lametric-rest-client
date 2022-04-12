@@ -48,12 +48,8 @@ class ErrorValidationItemNormalizer implements DenormalizerInterface, Normalizer
     public function normalize($object, $format = null, array $context = array())
     {
         $data = array();
-        if (null !== $object->getField()) {
-            $data['field'] = $object->getField();
-        }
-        if (null !== $object->getMessage()) {
-            $data['message'] = $object->getMessage();
-        }
+        $data['field'] = $object->getField();
+        $data['message'] = $object->getMessage();
         return $data;
     }
 }

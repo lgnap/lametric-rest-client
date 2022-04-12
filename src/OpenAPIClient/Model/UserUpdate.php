@@ -7,38 +7,38 @@ class UserUpdate
     /**
      *
      *
-     * @var string
+     * @var string|null
      */
     protected $username;
     /**
      *
      *
-     * @var string
+     * @var string|null
      */
     protected $authKey;
     /**
      *
      *
-     * @var string
+     * @var string|null
      */
     protected $accessToken;
     /**
      *
      *
-     * @return string
+     * @return string|null
      */
-    public function getUsername(): string
+    public function getUsername(): ?string
     {
         return $this->username;
     }
     /**
      *
      *
-     * @param string $username
+     * @param string|null $username
      *
      * @return self
      */
-    public function setUsername(string $username): self
+    public function setUsername(?string $username): self
     {
         $this->username = $username;
         return $this;
@@ -46,20 +46,20 @@ class UserUpdate
     /**
      *
      *
-     * @return string
+     * @return string|null
      */
-    public function getAuthKey(): string
+    public function getAuthKey(): ?string
     {
         return $this->authKey;
     }
     /**
      *
      *
-     * @param string $authKey
+     * @param string|null $authKey
      *
      * @return self
      */
-    public function setAuthKey(string $authKey): self
+    public function setAuthKey(?string $authKey): self
     {
         $this->authKey = $authKey;
         return $this;
@@ -67,20 +67,20 @@ class UserUpdate
     /**
      *
      *
-     * @return string
+     * @return string|null
      */
-    public function getAccessToken(): string
+    public function getAccessToken(): ?string
     {
         return $this->accessToken;
     }
     /**
      *
      *
-     * @param string $accessToken
+     * @param string|null $accessToken
      *
      * @return self
      */
-    public function setAccessToken(string $accessToken): self
+    public function setAccessToken(?string $accessToken): self
     {
         $this->accessToken = $accessToken;
         return $this;
