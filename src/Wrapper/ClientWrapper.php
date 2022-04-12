@@ -17,14 +17,14 @@ class ClientWrapper extends Client
     public const URL_PROD = 'https://lametric.helpcomputer.org/';
     public const URL_DEV = 'http://localhost:8000/';
 
-    public static function createProdClient(string $accessToken, string $version = 'v1'): ClientWrapper
+    public static function createProdClient(string $accessToken, string $version = 'v2'): ClientWrapper
     {
         $uri = Psr17FactoryDiscovery::findUriFactory()->createUri(self::URL_PROD . $version);
 
         return self::createCommonClient($uri, new BasicAuth($accessToken, ''));
     }
 
-    public static function createDevClient(string $accessToken, string $version = 'v1'): ClientWrapper
+    public static function createDevClient(string $accessToken, string $version = 'v2'): ClientWrapper
     {
         $uri = Psr17FactoryDiscovery::findUriFactory()->createUri(self::URL_DEV . $version);
 
