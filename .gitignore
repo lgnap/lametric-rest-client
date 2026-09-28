@@ -3,3 +3,5 @@ vendor/
 .php-cs-fixer.cache
 composer.phar
 open-api.yml
+.phpunit.cache/
+.phpunit.result.cache
