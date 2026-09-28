@@ -7,8 +7,6 @@ class UpdateDevice extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint impl
     use \LGnap\OpenAPIClient\Runtime\Client\EndpointTrait;
     protected $device_id;
     /**
-     *
-     *
      * @param int $deviceId
      * @param null|\LGnap\OpenAPIClient\Model\DeviceUpdate $requestBody
      */
@@ -23,18 +21,18 @@ class UpdateDevice extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint impl
     }
     public function getUri(): string
     {
-        return str_replace(array('{device_id}'), array($this->device_id), '/devices/{device_id}');
+        return str_replace(['{device_id}'], [rawurlencode($this->device_id)], '/devices/{device_id}');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
         if ($this->body instanceof \LGnap\OpenAPIClient\Model\DeviceUpdate) {
-            return array(array('Content-Type' => array('application/json')), $serializer->serialize($this->body, 'json'));
+            return [['Content-Type' => ['application/json']], \LGnap\OpenAPIClient\Runtime\Client\JsonPayload::encode($serializer, $this->body)];
         }
-        return array(array(), null);
+        return [[], null];
     }
     public function getExtraHeaders(): array
     {
-        return array('Accept' => array('application/json'));
+        return ['Accept' => ['application/json']];
     }
     /**
      * {@inheritdoc}
@@ -46,26 +44,28 @@ class UpdateDevice extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint impl
      *
      * @return null|\LGnap\OpenAPIClient\Model\Device
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Device', 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (is_null($contentType) === false && (200 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
+            return $serializer->deserialize($body, 'LGnap\OpenAPIClient\Model\Device', 'json');
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \LGnap\OpenAPIClient\Exception\UpdateDeviceUnauthorizedException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+        if (is_null($contentType) === false && (401 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
+            throw new \LGnap\OpenAPIClient\Exception\UpdateDeviceUnauthorizedException($serializer->deserialize($body, 'LGnap\OpenAPIClient\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \LGnap\OpenAPIClient\Exception\UpdateDeviceForbiddenException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+        if (is_null($contentType) === false && (403 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
+            throw new \LGnap\OpenAPIClient\Exception\UpdateDeviceForbiddenException($serializer->deserialize($body, 'LGnap\OpenAPIClient\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \LGnap\OpenAPIClient\Exception\UpdateDeviceNotFoundException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+        if (is_null($contentType) === false && (404 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
+            throw new \LGnap\OpenAPIClient\Exception\UpdateDeviceNotFoundException($serializer->deserialize($body, 'LGnap\OpenAPIClient\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (422 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \LGnap\OpenAPIClient\Exception\UpdateDeviceUnprocessableEntityException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\ErrorValidationItem[]', 'json'));
+        if (is_null($contentType) === false && (422 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
+            throw new \LGnap\OpenAPIClient\Exception\UpdateDeviceUnprocessableEntityException($serializer->deserialize($body, 'LGnap\OpenAPIClient\Model\ErrorValidationItem[]', 'json'), $response);
         }
     }
     public function getAuthenticationScopes(): array
     {
-        return array('basic');
+        return ['basicTokenAsUser'];
     }
 }

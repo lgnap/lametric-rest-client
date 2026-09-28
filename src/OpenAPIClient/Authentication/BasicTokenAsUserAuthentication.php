@@ -2,7 +2,7 @@
 
 namespace LGnap\OpenAPIClient\Authentication;
 
-class BasicAuthentication implements \Jane\OpenApiRuntime\Client\AuthenticationPlugin
+class BasicTokenAsUserAuthentication implements \Jane\Component\OpenApiRuntime\Client\AuthenticationPlugin
 {
     private $username;
     private $password;
@@ -19,6 +19,6 @@ class BasicAuthentication implements \Jane\OpenApiRuntime\Client\AuthenticationP
     }
     public function getScope(): string
     {
-        return 'basic';
+        return 'basicTokenAsUser';
     }
 }

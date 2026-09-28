@@ -2,9 +2,9 @@
 
 namespace LGnap\OpenAPIClient\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
 use LGnap\OpenAPIClient\Runtime\Normalizer\CheckArray;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use LGnap\OpenAPIClient\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -17,45 +17,61 @@ class ResponseFrameListNormalizer implements DenormalizerInterface, NormalizerIn
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    public function supportsDenormalization($data, $type, $format = null)
+    use ValidatorTrait;
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        return $type === 'LGnap\\OpenAPIClient\\Model\\ResponseFrameList';
+        return $type === \LGnap\OpenAPIClient\Model\ResponseFrameList::class;
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return is_object($data) && get_class($data) === 'LGnap\\OpenAPIClient\\Model\\ResponseFrameList';
+        return is_object($data) && get_class($data) === \LGnap\OpenAPIClient\Model\ResponseFrameList::class;
     }
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
-        if (isset($data['$ref'])) {
+        $object = new \LGnap\OpenAPIClient\Model\ResponseFrameList();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (isset($data['$ref']) && !isset($data['type']) && !isset($data['properties']) && !isset($data['allOf'])) {
             return new Reference($data['$ref'], $context['document-origin']);
         }
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \LGnap\OpenAPIClient\Model\ResponseFrameList();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
-        }
         if (\array_key_exists('frames', $data)) {
-            $values = array();
+            $values = [];
             foreach ($data['frames'] as $value) {
-                $values[] = $this->denormalizer->denormalize($value, 'LGnap\\OpenAPIClient\\Model\\Screen', 'json', $context);
+                $values[] = $this->denormalizer->denormalize($value, \LGnap\OpenAPIClient\Model\Screen::class, 'json', $context);
             }
             $object->setFrames($values);
+            unset($data['frames']);
+        }
+        foreach ($data as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value_1;
+            }
         }
         return $object;
     }
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
-        $data = array();
-        if (null !== $object->getFrames()) {
-            $values = array();
-            foreach ($object->getFrames() as $value) {
-                $values[] = $this->normalizer->normalize($value, 'json', $context);
+        $dataArray = [];
+        if ($data->isInitialized('frames') && null !== $data->getFrames()) {
+            $values = [];
+            foreach ($data->getFrames() as $value) {
+                $values[] = $value === null ? null : new \LGnap\OpenAPIClient\Runtime\JsonObject($this->normalizer->normalize($value, 'json', $context));
             }
-            $data['frames'] = $values;
+            $dataArray['frames'] = $values;
         }
-        return $data;
+        foreach ($data->additionalPropertyEntries() as $key => $value_1) {
+            if (preg_match('/.*/', (string) $key)) {
+                $dataArray[$key] = $value_1;
+            }
+        }
+        return $dataArray;
+    }
+    public function getSupportedTypes(?string $format = null): array
+    {
+        return [\LGnap\OpenAPIClient\Model\ResponseFrameList::class => false];
     }
 }

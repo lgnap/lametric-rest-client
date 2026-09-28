@@ -7,12 +7,17 @@ on:
 
 jobs:
   phpunit:
-    name: PHP ${{ matrix.php }}
+    name: PHP ${{ matrix.php }} (${{ matrix.dependencies }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        php: ['7.4']
+        php: ['8.1', '8.2', '8.3', '8.4']
+        dependencies: [highest]
+        include:
+          # Bornes basses déclarées dans composer.json (symfony/serializer 6.4, jane 7.14…)
+          - php: '8.1'
+            dependencies: lowest
 
     steps:
       - uses: actions/checkout@v4
@@ -22,12 +27,14 @@ jobs:
           php-version: ${{ matrix.php }}
           coverage: none
 
-      - name: Validate composer.json and lock
-        run: composer validate
+      - name: Validate composer.json
+        run: composer validate --no-check-lock
 
+      # Bibliothèque : on résout les dépendances pour chaque version de PHP
+      # plutôt que d'installer le lock (qui embarque Symfony 7.4, PHP >= 8.2).
       - uses: ramsey/composer-install@v3
         with:
-          dependency-versions: locked
+          dependency-versions: ${{ matrix.dependencies }}
 
       - name: PHPUnit
         run: vendor/bin/phpunit

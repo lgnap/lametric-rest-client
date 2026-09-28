@@ -1,4 +1,4 @@
-FROM php:latest
+FROM php:8.3-cli
 
 RUN useradd -m -u 1000 user
 

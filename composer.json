@@ -2,18 +2,21 @@
     "name": "lgnap/lametric-rest-client",
     "description": "This is an open api generated client with a little wrapper to make calls easiest",
     "require": {
-        "php": "^7.4",
-        "jane-php/open-api-runtime": "^6.3",
+        "php": "^8.1",
+        "jane-php/open-api-runtime": "^7.14",
+        "php-http/client-common": "^2.7",
+        "php-http/discovery": "^1.19",
+        "php-http/message": "^1.16",
         "psr/http-client-implementation": "^1.0",
         "psr/http-factory-implementation":  "^1.0"
     },
     "require-dev": {
-        "jane-php/open-api-3": "^6.3",
+        "jane-php/open-api-3": "^7.14",
         "friendsofphp/php-cs-fixer": "^3.0",
-        "guzzlehttp/guzzle": "^7.3",
-        "nyholm/psr7": "^1.4",
-        "phpunit/phpunit": "^9.6",
-        "php-http/mock-client": "~1.5.0"
+        "guzzlehttp/guzzle": "^7.9",
+        "nyholm/psr7": "^1.8",
+        "php-http/mock-client": "^1.6",
+        "phpunit/phpunit": "^10.5"
     },
     "autoload": {
         "psr-4": {
@@ -23,6 +26,11 @@
     "autoload-dev": {
         "psr-4": {
             "LGnap\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": false
         }
     }
 }
