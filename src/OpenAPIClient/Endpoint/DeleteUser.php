@@ -7,8 +7,6 @@ class DeleteUser extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint implem
     use \LGnap\OpenAPIClient\Runtime\Client\EndpointTrait;
     protected $user_id;
     /**
-     *
-     *
      * @param int $userId
      */
     public function __construct(int $userId)
@@ -21,15 +19,15 @@ class DeleteUser extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint implem
     }
     public function getUri(): string
     {
-        return str_replace(array('{user_id}'), array($this->user_id), '/users/{user_id}');
+        return str_replace(['{user_id}'], [rawurlencode($this->user_id)], '/users/{user_id}');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        return array(array(), null);
+        return [[], null];
     }
     public function getExtraHeaders(): array
     {
-        return array('Accept' => array('application/json'));
+        return ['Accept' => ['application/json']];
     }
     /**
      * {@inheritdoc}
@@ -40,23 +38,25 @@ class DeleteUser extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint implem
      *
      * @return null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (204 === $status) {
             return null;
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \LGnap\OpenAPIClient\Exception\DeleteUserUnauthorizedException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+        if (is_null($contentType) === false && (401 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
+            throw new \LGnap\OpenAPIClient\Exception\DeleteUserUnauthorizedException($serializer->deserialize($body, 'LGnap\OpenAPIClient\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \LGnap\OpenAPIClient\Exception\DeleteUserForbiddenException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+        if (is_null($contentType) === false && (403 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
+            throw new \LGnap\OpenAPIClient\Exception\DeleteUserForbiddenException($serializer->deserialize($body, 'LGnap\OpenAPIClient\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \LGnap\OpenAPIClient\Exception\DeleteUserNotFoundException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+        if (is_null($contentType) === false && (404 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
+            throw new \LGnap\OpenAPIClient\Exception\DeleteUserNotFoundException($serializer->deserialize($body, 'LGnap\OpenAPIClient\Model\Error', 'json'), $response);
         }
     }
     public function getAuthenticationScopes(): array
     {
-        return array('basic');
+        return ['basicTokenAsUser'];
     }
 }

@@ -6,13 +6,11 @@ class ListScreens extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint imple
 {
     use \LGnap\OpenAPIClient\Runtime\Client\EndpointTrait;
     /**
-     *
-     *
-     * @param array $queryParameters {
-     *     @var int $device_id
-     * }
+     * @param array{
+     *    "device_id": int,
+     * } $queryParameters
      */
-    public function __construct(array $queryParameters = array())
+    public function __construct(array $queryParameters = [])
     {
         $this->queryParameters = $queryParameters;
     }
@@ -26,19 +24,19 @@ class ListScreens extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint imple
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        return array(array(), null);
+        return [[], null];
     }
     public function getExtraHeaders(): array
     {
-        return array('Accept' => array('application/json'));
+        return ['Accept' => ['application/json']];
     }
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('device_id'));
-        $optionsResolver->setRequired(array('device_id'));
-        $optionsResolver->setDefaults(array());
-        $optionsResolver->setAllowedTypes('device_id', array('int'));
+        $optionsResolver->setDefined(['device_id']);
+        $optionsResolver->setRequired(['device_id']);
+        $optionsResolver->setDefaults([]);
+        $optionsResolver->addAllowedTypes('device_id', ['int']);
         return $optionsResolver;
     }
     /**
@@ -49,20 +47,22 @@ class ListScreens extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint imple
      *
      * @return null|\LGnap\OpenAPIClient\Model\Screen[]
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
-        if (is_null($contentType) === false && (200 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            return $serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Screen[]', 'json');
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
+        if (is_null($contentType) === false && (200 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
+            return $serializer->deserialize($body, 'LGnap\OpenAPIClient\Model\Screen[]', 'json');
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \LGnap\OpenAPIClient\Exception\ListScreensUnauthorizedException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+        if (is_null($contentType) === false && (401 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
+            throw new \LGnap\OpenAPIClient\Exception\ListScreensUnauthorizedException($serializer->deserialize($body, 'LGnap\OpenAPIClient\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \LGnap\OpenAPIClient\Exception\ListScreensForbiddenException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+        if (is_null($contentType) === false && (403 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
+            throw new \LGnap\OpenAPIClient\Exception\ListScreensForbiddenException($serializer->deserialize($body, 'LGnap\OpenAPIClient\Model\Error', 'json'), $response);
         }
     }
     public function getAuthenticationScopes(): array
     {
-        return array('basic');
+        return ['basicTokenAsUser'];
     }
 }

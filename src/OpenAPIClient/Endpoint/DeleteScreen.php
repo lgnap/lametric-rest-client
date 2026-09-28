@@ -7,14 +7,12 @@ class DeleteScreen extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint impl
     use \LGnap\OpenAPIClient\Runtime\Client\EndpointTrait;
     protected $screen_id;
     /**
-     *
-     *
      * @param int $screenId
-     * @param array $queryParameters {
-     *     @var int $device_id
-     * }
+     * @param array{
+     *    "device_id": int,
+     * } $queryParameters
      */
-    public function __construct(int $screenId, array $queryParameters = array())
+    public function __construct(int $screenId, array $queryParameters = [])
     {
         $this->screen_id = $screenId;
         $this->queryParameters = $queryParameters;
@@ -25,23 +23,23 @@ class DeleteScreen extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint impl
     }
     public function getUri(): string
     {
-        return str_replace(array('{screen_id}'), array($this->screen_id), '/screens/{screen_id}');
+        return str_replace(['{screen_id}'], [rawurlencode($this->screen_id)], '/screens/{screen_id}');
     }
     public function getBody(\Symfony\Component\Serializer\SerializerInterface $serializer, $streamFactory = null): array
     {
-        return array(array(), null);
+        return [[], null];
     }
     public function getExtraHeaders(): array
     {
-        return array('Accept' => array('application/json'));
+        return ['Accept' => ['application/json']];
     }
     protected function getQueryOptionsResolver(): \Symfony\Component\OptionsResolver\OptionsResolver
     {
         $optionsResolver = parent::getQueryOptionsResolver();
-        $optionsResolver->setDefined(array('device_id'));
-        $optionsResolver->setRequired(array('device_id'));
-        $optionsResolver->setDefaults(array());
-        $optionsResolver->setAllowedTypes('device_id', array('int'));
+        $optionsResolver->setDefined(['device_id']);
+        $optionsResolver->setRequired(['device_id']);
+        $optionsResolver->setDefaults([]);
+        $optionsResolver->addAllowedTypes('device_id', ['int']);
         return $optionsResolver;
     }
     /**
@@ -53,23 +51,25 @@ class DeleteScreen extends \LGnap\OpenAPIClient\Runtime\Client\BaseEndpoint impl
      *
      * @return null
      */
-    protected function transformResponseBody(string $body, int $status, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
+    protected function transformResponseBody(\Psr\Http\Message\ResponseInterface $response, \Symfony\Component\Serializer\SerializerInterface $serializer, ?string $contentType = null)
     {
+        $status = $response->getStatusCode();
+        $body = (string) $response->getBody();
         if (204 === $status) {
             return null;
         }
-        if (is_null($contentType) === false && (401 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \LGnap\OpenAPIClient\Exception\DeleteScreenUnauthorizedException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+        if (is_null($contentType) === false && (401 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
+            throw new \LGnap\OpenAPIClient\Exception\DeleteScreenUnauthorizedException($serializer->deserialize($body, 'LGnap\OpenAPIClient\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (403 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \LGnap\OpenAPIClient\Exception\DeleteScreenForbiddenException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+        if (is_null($contentType) === false && (403 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
+            throw new \LGnap\OpenAPIClient\Exception\DeleteScreenForbiddenException($serializer->deserialize($body, 'LGnap\OpenAPIClient\Model\Error', 'json'), $response);
         }
-        if (is_null($contentType) === false && (404 === $status && mb_strpos($contentType, 'application/json') !== false)) {
-            throw new \LGnap\OpenAPIClient\Exception\DeleteScreenNotFoundException($serializer->deserialize($body, 'LGnap\\OpenAPIClient\\Model\\Error', 'json'));
+        if (is_null($contentType) === false && (404 === $status && stripos(strtolower($contentType), 'application/json') !== false)) {
+            throw new \LGnap\OpenAPIClient\Exception\DeleteScreenNotFoundException($serializer->deserialize($body, 'LGnap\OpenAPIClient\Model\Error', 'json'), $response);
         }
     }
     public function getAuthenticationScopes(): array
     {
-        return array('basic');
+        return ['basicTokenAsUser'];
     }
 }

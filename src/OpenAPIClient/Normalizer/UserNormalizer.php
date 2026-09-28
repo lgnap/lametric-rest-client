@@ -2,9 +2,9 @@
 
 namespace LGnap\OpenAPIClient\Normalizer;
 
-use Jane\JsonSchemaRuntime\Reference;
+use Jane\Component\JsonSchemaRuntime\Reference;
 use LGnap\OpenAPIClient\Runtime\Normalizer\CheckArray;
-use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use LGnap\OpenAPIClient\Runtime\Normalizer\ValidatorTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -17,59 +17,81 @@ class UserNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
     use CheckArray;
-    public function supportsDenormalization($data, $type, $format = null)
+    use ValidatorTrait;
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        return $type === 'LGnap\\OpenAPIClient\\Model\\User';
+        return $type === \LGnap\OpenAPIClient\Model\User::class;
     }
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
-        return is_object($data) && get_class($data) === 'LGnap\\OpenAPIClient\\Model\\User';
+        return is_object($data) && get_class($data) === \LGnap\OpenAPIClient\Model\User::class;
     }
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
-        if (isset($data['$ref'])) {
+        $object = new \LGnap\OpenAPIClient\Model\User();
+        if (null === $data || false === \is_array($data)) {
+            return $object;
+        }
+        if (isset($data['$ref']) && !isset($data['type']) && !isset($data['properties']) && !isset($data['allOf'])) {
             return new Reference($data['$ref'], $context['document-origin']);
         }
         if (isset($data['$recursiveRef'])) {
             return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
-        $object = new \LGnap\OpenAPIClient\Model\User();
-        if (null === $data || false === \is_array($data)) {
-            return $object;
-        }
         if (\array_key_exists('username', $data) && $data['username'] !== null) {
             $object->setUsername($data['username']);
+            unset($data['username']);
         } elseif (\array_key_exists('username', $data) && $data['username'] === null) {
             $object->setUsername(null);
+            unset($data['username']);
         }
         if (\array_key_exists('authKey', $data) && $data['authKey'] !== null) {
             $object->setAuthKey($data['authKey']);
+            unset($data['authKey']);
         } elseif (\array_key_exists('authKey', $data) && $data['authKey'] === null) {
             $object->setAuthKey(null);
+            unset($data['authKey']);
         }
         if (\array_key_exists('accessToken', $data) && $data['accessToken'] !== null) {
             $object->setAccessToken($data['accessToken']);
+            unset($data['accessToken']);
         } elseif (\array_key_exists('accessToken', $data) && $data['accessToken'] === null) {
             $object->setAccessToken(null);
+            unset($data['accessToken']);
         }
         if (\array_key_exists('id', $data)) {
             $object->setId($data['id']);
+            unset($data['id']);
+        }
+        foreach ($data as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $object[$key] = $value;
+            }
         }
         return $object;
     }
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
-        $data = array();
-        if (null !== $object->getUsername()) {
-            $data['username'] = $object->getUsername();
+        $dataArray = [];
+        if ($data->isInitialized('username') && null !== $data->getUsername()) {
+            $dataArray['username'] = $data->getUsername();
         }
-        if (null !== $object->getAuthKey()) {
-            $data['authKey'] = $object->getAuthKey();
+        if ($data->isInitialized('authKey') && null !== $data->getAuthKey()) {
+            $dataArray['authKey'] = $data->getAuthKey();
         }
-        if (null !== $object->getAccessToken()) {
-            $data['accessToken'] = $object->getAccessToken();
+        if ($data->isInitialized('accessToken') && null !== $data->getAccessToken()) {
+            $dataArray['accessToken'] = $data->getAccessToken();
         }
-        $data['id'] = $object->getId();
-        return $data;
+        $dataArray['id'] = $data->getId();
+        foreach ($data->additionalPropertyEntries() as $key => $value) {
+            if (preg_match('/.*/', (string) $key)) {
+                $dataArray[$key] = $value;
+            }
+        }
+        return $dataArray;
+    }
+    public function getSupportedTypes(?string $format = null): array
+    {
+        return [\LGnap\OpenAPIClient\Model\User::class => false];
     }
 }
